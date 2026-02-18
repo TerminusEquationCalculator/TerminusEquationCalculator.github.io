@@ -1,193 +1,537 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>BO6 Terminus Equation Calculator | Instant Math Solver</title>
-  <meta name="description" content="Solve Terminus equations instantly for Call of Duty Black Ops 6 Zombies. Fast, accurate and mobile friendly Terminus equation calculator.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>BO6 Terminus Equation Calculator | Instant Math Solver</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Muli / Mulish Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Mulish', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
 
-  <style>
-    body {
-      font-family: 'Mulish', sans-serif;
-      background-color: #0e0e0e;
-      color: #ffffff;
-    }
+        .container {
+            max-width: 1200px !important;
+        }
 
-    .navbar {
-      background-color: #111;
-    }
+        /* Navbar */
+        .navbar {
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
 
-    .navbar-brand {
-      font-weight: 800;
-      color: #00ff99 !important;
-    }
+        .navbar-brand {
+            font-weight: 800;
+            color: #0d6efd !important;
+        }
 
-    .hero {
-      padding: 120px 0;
-      background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
-      text-align: center;
-    }
+        /* Hero */
+        .hero {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #ffffff, #eef3f9);
+            text-align: center;
+        }
 
-    .hero h1 {
-      font-weight: 800;
-      font-size: 3rem;
-      color: #00ff99;
-    }
+        .hero h1 {
+            font-weight: 800;
+            font-size: 2.8rem;
+        }
 
-    .hero p {
-      font-size: 1.2rem;
-      margin-top: 20px;
-      color: #ccc;
-    }
+        .hero p {
+            font-size: 1.1rem;
+            color: #555;
+        }
 
-    .btn-primary {
-      background-color: #00ff99;
-      border: none;
-      color: #000;
-      font-weight: 700;
-    }
+        /* Tool Section */
+        .tool-section {
+            padding: 80px 0;
+        }
 
-    .tool-section {
-      padding: 80px 0;
-      background-color: #151515;
-    }
+        .card {
+            border-radius: 15px;
+        }
 
-    .info-section {
-      padding: 80px 0;
-      line-height: 1.8;
-    }
+        /* Variable Images */
+        .variable {
+            margin: 20px 0;
+        }
 
-    .info-section h2 {
-      color: #00ff99;
-      margin-top: 40px;
-      font-weight: 700;
-    }
+        .image-option {
+            cursor: pointer;
+            margin: 5px;
+            display: inline-block;
+        }
 
-    footer {
-      background-color: #111;
-      padding: 40px 0;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #aaa;
-    }
+        img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
 
-  </style>
+        img:hover {
+            transform: scale(1.08);
+        }
+
+        img.selected {
+            border-color: #0d6efd;
+            box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
+        }
+
+        /* Results */
+        #results {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f1f3f5;
+            border-radius: 10px;
+        }
+
+        #results h3 {
+            font-weight: 700;
+        }
+
+        /* Info Section */
+        .info-section {
+            padding: 80px 0;
+            line-height: 1.8;
+        }
+
+        .info-section h2 {
+            margin-top: 40px;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        footer {
+            background: #ffffff;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 1px solid #ddd;
+        }
+
+        /* Donation Banner */
+        .donation-banner {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e7f1ff;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .close-banner {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            border: none;
+            background: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 400px) {
+            img {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<!-- ================= NAVBAR ================= -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-  <div class="container">
-    <a class="navbar-brand" href="#">BO6 Terminus Calculator</a>
-  </div>
-</nav>
+    <!-- NAVBAR -->
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white shadow-sm">
+        <div class="container">
 
-<!-- ================= HERO SECTION ================= -->
-<section class="hero">
-  <div class="container">
-    <h1>BO6 Terminus Equation Calculator</h1>
-    <p>Solve Terminus Zombie math puzzles instantly. Fast. Accurate. Mobile-friendly.</p>
-    <a href="#calculator" class="btn btn-primary btn-lg mt-4">Solve Now</a>
-  </div>
-</section>
+            <!-- Logo / Brand -->
+            <a class="navbar-brand fw-bold text-primary" href="/">
+                BO6 Terminus Calculator
+            </a>
 
-<!-- ================= TOOL SECTION ================= -->
-<section id="calculator" class="tool-section">
-  <div class="container text-center">
-    <h2 class="mb-4">Terminus Equation Solver Tool</h2>
+            <!-- Mobile Toggle -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <!-- 🔥 PASTE YOUR TOOL CODE BELOW -->
-    <div class="card bg-dark text-white p-4 shadow">
-      <!-- Your Calculator Code Here -->
-      <p>Your calculator tool code goes here.</p>
-    </div>
+            <!-- Right Side Menu -->
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
 
-  </div>
-</section>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#calculator">Calculator</a>
+                    </li>
 
-<!-- ================= INFORMATION SECTION ================= -->
-<section class="info-section">
-  <div class="container">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#info">Guide</a>
+                    </li>
 
-    <h2>What is the Terminus Equation Puzzle in BO6?</h2>
-    <p>
-    The Terminus equation puzzle in Black Ops 6 Zombies is one of the most discussed and searched mechanics in the entire map. During the Easter Egg progression, players encounter mathematical expressions that must be solved correctly in order to advance. These equations often appear under pressure, with zombies actively attacking the team. Because of this, accuracy and speed become extremely important.
-    </p>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog/">Blog</a>
+                    </li>
 
-    <p>
-    Unlike traditional Zombies objectives such as collecting parts or defending generators, the Terminus math step requires logical thinking. The game may display combinations of numbers and operators including addition, subtraction, multiplication, and division. Players must calculate the correct result and input it into the device or terminal provided within the map.
-    </p>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about.html">About</a>
+                    </li>
 
-    <h2>Why Players Need a Terminus Calculator</h2>
-    <p>
-    Solving equations manually in the middle of a zombie round is risky. Even skilled players can make mistakes under stress. A single incorrect input may reset progress or spawn additional enemies. That is why a dedicated BO6 Terminus Equation Calculator is essential.
-    </p>
+                    <li class="nav-item">
+                        <a class="btn btn-primary ms-lg-3" href="#calculator">
+                            Solve Now
+                        </a>
+                    </li>
 
-    <p>
-    This tool allows you to quickly enter the displayed equation and instantly receive the correct answer. Instead of pausing to calculate in your head, you can open this mobile-friendly tool and get results within seconds. It works perfectly on phones, tablets, and desktops.
-    </p>
+                </ul>
+            </div>
 
-    <h2>How the Terminus Math Step Works</h2>
-    <p>
-    During the Easter Egg sequence in Terminus, players will discover a board or screen displaying numbers combined with mathematical symbols. The equation must be interpreted correctly, paying attention to order of operations. In many cases, multiplication and division must be solved before addition and subtraction.
-    </p>
+        </div>
+    </nav>
 
-    <p>
-    For example, if the displayed puzzle shows: 12 + 7 × 3, the correct method is to multiply 7 by 3 first, then add 12. This results in 33. Incorrectly adding 12 and 7 first would produce a wrong answer. Understanding PEMDAS (Parentheses, Exponents, Multiplication, Division, Addition, Subtraction) is critical.
-    </p>
 
-    <h2>Features of This BO6 Terminus Equation Calculator</h2>
-    <p>
-    This calculator is built specifically for Terminus players. It supports all basic mathematical operators used within the map. The tool is optimized for fast performance and works even on slower mobile networks. No downloads are required and no login is necessary.
-    </p>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <h1>BO6 Terminus Equation Calculator</h1>
+            <p>Solve Terminus Zombie math puzzles instantly. Fast. Accurate. Mobile-friendly.</p>
+            <a href="#calculator" class="btn btn-primary btn-lg mt-3">Solve Now</a>
+        </div>
+    </section>
 
-    <p>
-    The interface is designed with a dark theme inspired by the Zombies atmosphere. Large buttons make it easy to type equations quickly while playing. The tool automatically evaluates expressions in the correct mathematical order.
-    </p>
+    <!-- TOOL -->
+    <section id="calculator" class="tool-section">
+        <div class="container text-center">
+            <h2 class="mb-4">Terminus Equation Solver Tool</h2>
 
-    <h2>Mobile Friendly for In-Game Use</h2>
-    <p>
-    Many players use a second device while gaming. This website is fully responsive thanks to Bootstrap, meaning it adjusts perfectly to smaller screens. Whether you are using Android, iPhone, or tablet, the Terminus calculator remains clean and readable.
-    </p>
+            <div class="card p-4 shadow">
 
-    <h2>SEO Optimized Terminus Solver</h2>
-    <p>
-    This page is optimized to help players searching for terms like “BO6 Terminus calculator,” “Terminus equation answer,” and “Black Ops 6 Zombies math puzzle solver.” By focusing specifically on this mechanic, the site provides targeted and relevant assistance to the Zombies community.
-    </p>
+                <h4>Select Values for X, Y and Z</h4>
 
-    <h2>Improve Your Zombies Strategy</h2>
-    <p>
-    Mastering the Terminus equation step gives your team a major advantage. Instead of wasting time calculating, you can focus on training zombies and protecting teammates. Fast puzzle completion keeps rounds controlled and prevents unnecessary chaos.
-    </p>
+                <div class="variable" id="x-variables">
+                    <h5>X:</h5>
+                    <div class="image-option" onclick="selectVariable('x',0)"><img
+                            src="https://i.ibb.co/5rDRw30/symbols-01.jpg" alt="Value 0"></div>
+                    <div class="image-option" onclick="selectVariable('x',10)"><img
+                            src="https://i.ibb.co/PFmbJ00/symbols-02.jpg" alt="Value 10"></div>
+                    <div class="image-option" onclick="selectVariable('x',11)"><img
+                            src="https://i.ibb.co/FqXw4mG/symbols-03.jpg" alt="Value 11"></div>
+                    <div class="image-option" onclick="selectVariable('x',20)"><img
+                            src="https://i.ibb.co/TrNY7Qf/symbols-04.jpg" alt="Value 20"></div>
+                    <div class="image-option" onclick="selectVariable('x',21)"><img
+                            src="https://i.ibb.co/jfYKRth/symbols-05.jpg" alt="Value 21"></div>
+                    <div class="image-option" onclick="selectVariable('x',22)"><img
+                            src="https://i.ibb.co/bXGth05/symbols-06.jpg" alt="Value 22"></div>
+                </div>
 
-    <p>
-    Competitive players aiming for high rounds or speedruns benefit greatly from using a reliable calculator. Precision matters in Zombies, and minimizing human error is part of advanced gameplay strategy.
-    </p>
+                <div class="variable" id="y-variables">
+                    <h5>Y:</h5>
+                    <div class="image-option" onclick="selectVariable('y',0)"><img
+                            src="https://i.ibb.co/5rDRw30/symbols-01.jpg" alt="Value 0"></div>
+                    <div class="image-option" onclick="selectVariable('y',10)"><img
+                            src="https://i.ibb.co/PFmbJ00/symbols-02.jpg" alt="Value 10"></div>
+                    <div class="image-option" onclick="selectVariable('y',11)"><img
+                            src="https://i.ibb.co/FqXw4mG/symbols-03.jpg" alt="Value 11"></div>
+                    <div class="image-option" onclick="selectVariable('y',20)"><img
+                            src="https://i.ibb.co/TrNY7Qf/symbols-04.jpg" alt="Value 20"></div>
+                    <div class="image-option" onclick="selectVariable('y',21)"><img
+                            src="https://i.ibb.co/jfYKRth/symbols-05.jpg" alt="Value 21"></div>
+                    <div class="image-option" onclick="selectVariable('y',22)"><img
+                            src="https://i.ibb.co/bXGth05/symbols-06.jpg" alt="Value 22"></div>
+                </div>
 
-    <h2>Final Thoughts</h2>
-    <p>
-    The BO6 Terminus Equation Calculator is a simple yet powerful companion tool for Zombies players. By delivering instant results with an intuitive interface, it removes frustration and improves team efficiency. Whether you are attempting the Easter Egg for the first time or pushing for record-breaking rounds, this calculator ensures you never get stuck on a math step again.
-    </p>
+                <div class="variable" id="z-variables">
+                    <h5>Z:</h5>
+                    <div class="image-option" onclick="selectVariable('z',0)"><img
+                            src="https://i.ibb.co/5rDRw30/symbols-01.jpg" alt="Value 0"></div>
+                    <div class="image-option" onclick="selectVariable('z',10)"><img
+                            src="https://i.ibb.co/PFmbJ00/symbols-02.jpg" alt="Value 10"></div>
+                    <div class="image-option" onclick="selectVariable('z',11)"><img
+                            src="https://i.ibb.co/FqXw4mG/symbols-03.jpg" alt="Value 11"></div>
+                    <div class="image-option" onclick="selectVariable('z',20)"><img
+                            src="https://i.ibb.co/TrNY7Qf/symbols-04.jpg" alt="Value 20"></div>
+                    <div class="image-option" onclick="selectVariable('z',21)"><img
+                            src="https://i.ibb.co/jfYKRth/symbols-05.jpg" alt="Value 21"></div>
+                    <div class="image-option" onclick="selectVariable('z',22)"><img
+                            src="https://i.ibb.co/bXGth05/symbols-06.jpg" alt="Value 22"></div>
+                </div>
 
-  </div>
-</section>
+                <div id="results">
+                    <h3>Results:</h3>
+                    <p id="result1">1° Number:</p>
+                    <p id="result2">2° Number:</p>
+                    <p id="result3">3° Number:</p>
+                </div>
 
-<!-- ================= FOOTER ================= -->
-<footer>
-  <div class="container">
-    <p>© 2026 BO6 Terminus Calculator. All rights reserved.</p>
-    <p>This website is not affiliated with Activision or Call of Duty.</p>
-  </div>
-</footer>
+            </div>
+        </div>
+    </section>
+    <section class="info-section">
+        <div class="container">
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+            <h2>What is the Terminus Equation Puzzle in BO6 Zombies?</h2>
+            <p>
+                The Terminus equation puzzle in Call of Duty Black Ops 6 Zombies is one of the most unique and
+                challenging mechanics introduced in the map. Unlike traditional objectives such as turning on power,
+                building wonder weapons, or defending generators, this step requires players to solve mathematical
+                expressions correctly in order to progress through the Easter Egg storyline.
+            </p>
+
+            <p>
+                During the Terminus Easter Egg, players encounter a device that displays symbol-based numerical values
+                connected to variables like X, Y, and Z. These symbols represent specific numbers, and players must
+                interpret them correctly before entering the final three-number solution. The challenge becomes even
+                more intense because zombies continue spawning while the team is trying to solve the puzzle.
+            </p>
+
+            <h2>Why Players Search for a BO6 Terminus Calculator</h2>
+            <p>
+                Solving math under pressure is not easy. In high rounds, even a small delay can cause a player to go
+                down. Because of this, many players search online for a fast and reliable Terminus equation solver.
+                Instead of manually calculating each expression, this calculator allows players to select the symbol
+                values and instantly receive the three required numbers.
+            </p>
+
+            <p>
+                Speed is critical during Zombies gameplay. The faster you solve the equation, the faster your team can
+                move to the next step. This tool eliminates mistakes and reduces stress during intense rounds.
+            </p>
+
+            <h2>How the Terminus Equation System Works</h2>
+            <p>
+                In the Terminus map, each symbol corresponds to a hidden numerical value. Once you determine the values
+                for X, Y, and Z, the game requires you to calculate three separate results using specific formulas.
+                These formulas typically involve multiplication, addition, and subtraction.
+            </p>
+
+            <p>
+                For example, the equation may require:
+            </p>
+
+            <ul>
+                <li>First Number = (X × 2) + 11</li>
+                <li>Second Number = ((Z × 2) + Y) − 5</li>
+                <li>Third Number = |(Z + Y) − X|</li>
+            </ul>
+
+            <p>
+                Understanding the order of operations is important. The calculator on this page automatically performs
+                the calculations correctly, ensuring accurate results every time.
+            </p>
+
+            <h2>Features of This Terminus Equation Calculator</h2>
+
+            <p>This BO6 Terminus calculator was built specifically for Zombies players. It includes:</p>
+
+            <ul>
+                <li>Instant automatic result calculation</li>
+                <li>Symbol selection system for X, Y, and Z</li>
+                <li>Mobile-friendly responsive design</li>
+                <li>Lightweight fast loading interface</li>
+                <li>No login or account required</li>
+            </ul>
+
+            <p>
+                The tool works smoothly on desktop, tablet, and mobile devices. Many players keep their phone open
+                beside their console or PC while completing the Easter Egg. This design ensures the calculator remains
+                clear and easy to use even on small screens.
+            </p>
+
+            <h2>Mobile Friendly for In-Game Use</h2>
+            <p>
+                Bootstrap ensures that the layout automatically adjusts to any screen size. Whether you are using
+                Android, iPhone, or a tablet, the symbol buttons remain accessible and the results section stays
+                readable. This makes it perfect for live in-game usage.
+            </p>
+
+            <p>
+                Because the site is lightweight and optimized, it loads quickly even on slower internet connections.
+            </p>
+
+            <h2>How This Tool Improves Your Zombies Strategy</h2>
+            <p>
+                High-level Zombies gameplay is about efficiency. The longer your team stays in one area solving puzzles,
+                the higher the risk becomes. By using this Terminus calculator, you reduce downtime and eliminate
+                calculation errors.
+            </p>
+
+            <p>
+                This is especially useful for:
+            </p>
+
+            <ul>
+                <li>Speedrunners attempting fast Easter Egg completion</li>
+                <li>High-round players managing zombie trains</li>
+                <li>New players learning the Terminus map</li>
+                <li>Teams attempting no-down challenges</li>
+            </ul>
+
+            <p>
+                Accuracy matters. One wrong number can reset progress or delay the team. This calculator guarantees
+                precision.
+            </p>
+
+            <h2>Is This Tool Safe to Use?</h2>
+            <p>
+                Yes. This website does not require login, downloads, or personal data. It runs entirely inside your
+                browser. There are no hidden scripts or background processes. The tool simply performs mathematical
+                calculations based on your selected values.
+            </p>
+
+            <h2>Understanding the Terminus Easter Egg Step</h2>
+            <p>
+                The Terminus Easter Egg involves multiple stages, and the equation puzzle is one of the most important
+                progression gates. Players must correctly interpret symbol meanings before entering the solution into
+                the terminal device.
+            </p>
+
+            <p>
+                Because symbols can sometimes look similar, mistakes happen frequently. That is why this visual
+                selection-based calculator helps reduce confusion.
+            </p>
+
+            <h2>Common Mistakes Players Make</h2>
+
+            <ul>
+                <li>Confusing similar symbols</li>
+                <li>Forgetting order of operations</li>
+                <li>Entering negative numbers incorrectly</li>
+                <li>Misreading the formula under pressure</li>
+            </ul>
+
+            <p>
+                This calculator avoids these mistakes by automatically handling the formulas once X, Y, and Z are
+                selected.
+            </p>
+
+            <h2>SEO Optimized BO6 Terminus Solver</h2>
+            <p>
+                Players searching for “BO6 Terminus calculator,” “Terminus equation answer,” “Black Ops 6 Zombies math
+                solver,” or “Terminus Easter Egg puzzle solution” will find this tool helpful and easy to use. It is
+                designed specifically around the Terminus equation mechanic to provide focused and relevant assistance.
+            </p>
+
+            <h2>Final Thoughts</h2>
+            <p>
+                The BO6 Terminus Equation Calculator is a simple yet powerful support tool for Zombies players. By
+                combining speed, accuracy, and ease of use, it removes one of the most frustrating steps in the Terminus
+                Easter Egg process.
+            </p>
+
+            <p>
+                Whether you are completing the Easter Egg for the first time or pushing for high rounds, this calculator
+                ensures you never get stuck on the math puzzle again. Select your symbol values, get instant results,
+                and focus on surviving the undead.
+            </p>
+
+        </div>
+    </section>
+    <!-- ================= BLOG SECTION ================= -->
+    <section class="py-5 bg-light">
+        <div class="container">
+
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Latest Guides & Blog Posts</h2>
+                <p class="text-muted">Improve your BO6 Terminus strategy with detailed walkthroughs and tips.</p>
+            </div>
+
+            <div class="row g-4">
+
+                <!-- Post 1 -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="https://i.imgur.com/3ZQ3Z4S.jpg" class="card-img-top"
+                            alt="BO6 Terminus Easter Egg Guide">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Complete Terminus Easter Egg Guide</h5>
+                            <p class="card-text text-muted">
+                                Step-by-step walkthrough to complete the full Terminus Easter Egg in Black Ops 6
+                                Zombies.
+                            </p>
+                            <a href="/blog/terminus-easter-egg-guide.html" class="btn btn-primary btn-sm">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Post 2 -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="https://i.imgur.com/Qc8Qy7G.jpg" class="card-img-top"
+                            alt="BO6 Terminus High Round Strategy">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Best High Round Strategy in Terminus</h5>
+                            <p class="card-text text-muted">
+                                Discover the safest training spots and weapon loadouts for surviving high rounds.
+                            </p>
+                            <a href="/blog/terminus-high-round-strategy.html" class="btn btn-primary btn-sm">Read
+                                More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Post 3 -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="https://i.imgur.com/X8a9d6S.jpg" class="card-img-top"
+                            alt="BO6 Terminus Wonder Weapon Guide">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">How to Unlock the Terminus Wonder Weapon</h5>
+                            <p class="card-text text-muted">
+                                Learn how to unlock and upgrade the powerful Wonder Weapon on the Terminus map.
+                            </p>
+                            <a href="/blog/terminus-wonder-weapon-guide.html" class="btn btn-primary btn-sm">Read
+                                More</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>© 2026 BO6 Terminus Calculator</p>
+            <p>Not affiliated with Activision or Call of Duty.</p>
+        </div>
+    </footer>
+
+    <script>
+        let xValue = null, yValue = null, zValue = null;
+
+        function selectVariable(variable, value) {
+            if (variable === 'x') xValue = value;
+            if (variable === 'y') yValue = value;
+            if (variable === 'z') zValue = value;
+            updateImageSelection(variable, value);
+            if (xValue !== null && yValue !== null && zValue !== null) calculateResults();
+        }
+
+        function updateImageSelection(variable, value) {
+            document.querySelectorAll(`#${variable}-variables img`).forEach(img => img.classList.remove('selected'));
+            let selected = document.querySelector(`#${variable}-variables img[alt="Value ${value}"]`);
+            if (selected) selected.classList.add('selected');
+        }
+
+        function calculateResults() {
+            let result1 = (xValue * 2) + 11;
+            let result2 = ((zValue * 2) + yValue) - 5;
+            let result3 = Math.abs((zValue + yValue) - xValue);
+
+            document.getElementById('result1').innerHTML = `1° Number: <strong>${result1}</strong>`;
+            document.getElementById('result2').innerHTML = `2° Number: <strong>${result2}</strong>`;
+            document.getElementById('result3').innerHTML = `3° Number: <strong>${result3}</strong>`;
+        }
+    </script>
 
 </body>
+
 </html>
